@@ -1,0 +1,22 @@
+SELECT DISTINCT customer_id, COUNT(customer_id) AS count_no_trans
+FROM Visits 
+WHERE visit_id NOT IN(
+    SELECT visit_id FROM Transactions
+)
+GROUP BY customer_id
+
+
+
+------------------OR------------------------
+* Using SQL operations
+
+SELECT DISTINCT customer_id, COUNT(VISIT_ID) AS count_no_trans
+FROM Visits V
+WHERE VISIT_ID IN(
+    SELECT visit_id
+    FROM Visits V 
+    EXCEPT 
+    SELECT visit_id
+    FROM Transactions T
+)
+GROUP BY customer_id
