@@ -1,0 +1,6 @@
+SELECT name FROM EMPLOYEE 
+WHERE ID IN(
+    SELECT managerId FROM EMPLOYEE 
+    GROUP BY managerId
+    HAVING COUNT(managerId) >= 5
+)
