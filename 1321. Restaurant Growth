@@ -1,0 +1,7 @@
+select distinct C1.visited_on, sum(C2.amount) as amount, round(sum(C2.amount)/7, 2) as average_amount
+from Customer C1 join Customer C2 
+on datediff(C1.visited_on,C2.visited_on) >= 0
+and datediff(C1.visited_on, C2.visited_on) <= 6
+group by C1.visited_on, C1.customer_id
+having  count(distinct C2.visited_on) = 7
+order by visited_on
